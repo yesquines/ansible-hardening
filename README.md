@@ -74,7 +74,7 @@ A role desse repositório foi criada com o intuito de apresentar um Hardening b�
         └── main.yml
 ```
 
-A role fará a configuração de boas práticas de securança nos servidores provisionados pelo Vagrant, por isso sua execução pode ser realizada seguinte o comandos abaixo:
+A role fará a configuração de boas práticas de segurança nos servidores provisionados pelo Vagrant, por isso sua execução pode ser realizada seguindo o comandos abaixo:
 
 ```bash
 ansible-galaxy colletion install ansible.posix community.general
