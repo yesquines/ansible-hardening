@@ -1,0 +1,30 @@
+- name: SSH - Server Configuration
+  ansible.builtin.template:
+    src: 'sshd_config.j2'
+    dest: '/etc/ssh/sshd_config'
+    mode: '0600'
+    owner: 'root'
+    group: 'root'
+    validate: '/usr/sbin/sshd -T -C user=root -C host=localhost -C addr=localhost -C lport=22 -f %s'
+  notify: restart_sshd
+
+- name: Create /etc/ssh/revoked_keys
+  ansible.builtin.file:
+    path: /etc/ssh/revoked_keys
+    state: touch
+
+- name: Copy login warning banner
+  ansible.builtin.copy:
+    content: "{{ ssh_login_banner_text }}"
+    dest: /etc/motd
+    owner: root
+    group: root
+
+- name: SSH - Client Configuration
+  ansible.builtin.template:
+    src: 'ssh_config.j2'
+    dest: '/etc/ssh/ssh_config'
+    mode: '0644'
+    owner: 'root'
+    group: 'root'
+

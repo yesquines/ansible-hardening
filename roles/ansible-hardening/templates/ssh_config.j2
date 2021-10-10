@@ -1,0 +1,71 @@
+# This is the ssh client system-wide configuration file.
+# See ssh_config(5) for more information on any settings used. Comments will be added only to clarify why a configuration was chosen.
+
+# Basic configuration
+# ===================
+
+# Address family should always be limited to the active network configuration.
+AddressFamily any
+
+# Global defaults for all Hosts
+Host *
+
+# The port at the destination should be defined
+Port {{ ssh_client_port }}
+
+# Identity file configuration. You may restrict available identity files. Otherwise ssh will search for a pattern and use any that matches.
+#IdentityFile ~/.ssh/identity
+#IdentityFile ~/.ssh/id_rsa
+#IdentityFile ~/.ssh/id_dsa
+
+# Security configuration
+# ======================
+
+# Set the protocol version to 2 for security reasons. Disables legacy support.
+Protocol 2
+
+# Make sure passphrase querying is enabled
+BatchMode no
+
+# Prevent IP spoofing by checking to host IP against the `known_hosts` file.
+CheckHostIP yes
+
+# Always ask before adding keys to the `known_hosts` file. Do not set to `yes`.
+StrictHostKeyChecking ask
+
+# Disable agent forwarding, since local agent could be accessed through forwarded connection.
+ForwardAgent no
+
+# Disable X11 forwarding, since local X11 display could be accessed through forwarded connection.
+ForwardX11 no
+
+# Never use host-based authentication. It can be exploited.
+HostbasedAuthentication no
+
+# Disable password-based authentication, it can allow for potentially easier brute-force attacks.
+PasswordAuthentication {{ ssh_client_password_login }}
+
+# Only use GSSAPIAuthentication if implemented on the network.
+GSSAPIAuthentication no
+GSSAPIDelegateCredentials no
+
+# Disable tunneling
+Tunnel no
+
+# Disable local command execution.
+PermitLocalCommand no
+
+# Misc. configuration
+# ===================
+
+Compression {{ ssh_client_compression }}
+
+#EscapeChar ~
+#VisualHostKey yes
+
+# Disable experimental client roaming. This is known to cause potential issues with secrets being disclosed to malicious servers and defaults to being disabled.
+UseRoaming {{ ssh_client_roaming }}
+
+HashKnownHosts {{ ssh_client_hashknoenhosts }}
+
+SendEnv {{ ssh_client_sendenv }}

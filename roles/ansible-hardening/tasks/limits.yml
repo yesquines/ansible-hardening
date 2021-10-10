@@ -1,0 +1,25 @@
+- name: Limits - Prevent Core Dumps
+  block:
+  - name: Limits - Create limits.d Directory
+    ansible.builtin.file:
+      path: '/etc/security/limits.d'
+      owner: 'root'
+      group: 'root'
+      mode: '0755'
+      state: 'directory'
+  - name: Limits - File permission
+    ansible.builtin.file:
+      path: /etc/security/limits.d/10.hardcore.conf
+      owner: 'root'
+      group: 'root'
+      mode: '0440'
+      state: 'touch'
+  - name: Limits - Prevent Core Dumps
+    community.general.pam_limits:
+      dest: '/etc/security/limits.d/10.hardcore.conf'
+      domain: '*'
+      limit_type: hard
+      limit_item: core
+      value: '0'
+      comment: 'Prevent core dumps for all users. These are usually not needed and may contain sensitive information'
+

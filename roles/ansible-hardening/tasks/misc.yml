@@ -1,0 +1,16 @@
+- name: Configurando Timeout de sessão 
+  ansible.builtin.blockinfile:
+    dest: /etc/profile
+    state: present
+    insertbefore: EOF
+    marker: "# {mark} MANAGED BY ANSIBLE-HARDENING"
+    block: |
+      TMOUT={{ session_timeout }}
+      readonly TMOUT
+      export TMOUT
+
+- name: Desabilitando Ctrl-Alt-Delete 
+  ansible.builtin.systemd:
+    name: ctrl-alt-del.target
+    masked: yes
+    enabled: no

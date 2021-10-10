@@ -1,0 +1,16 @@
+---
+# tasks file for ansible-hardening
+- include_tasks: ssh_configuration.yml
+  when: hardening_ssh
+
+- include_tasks: login_defs.yml
+  when: hardening_logindefs
+
+- include_tasks: limits.yml
+  when: hardening_limits
+
+- include_tasks: disable_unsed_fs_net.yml
+  when: hardening_fs_net
+
+- include_tasks: misc.yml
+  when: hardening_misc 

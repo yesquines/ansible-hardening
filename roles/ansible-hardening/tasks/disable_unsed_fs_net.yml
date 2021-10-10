@@ -1,0 +1,28 @@
+- name: Disable unused filesystems
+  block:
+  - name: Disable unused filesystems
+    ansible.builtin.lineinfile:
+      path: /etc/modprobe.d/unused-filesystems.conf
+      create: yes
+      line: "install {{ item }} /bin/true"
+    loop: "{{ unused_filesystems }}"
+  - name: Disable unused filesystems
+    community.general.modprobe:
+      name: "{{ item }}"
+      state: absent
+    loop: "{{ unused_filesystems }}"
+
+- name: Disable Uncommon Network Protocols
+  block:
+  - name: Disable Uncommon Network Protocols
+    ansible.builtin.lineinfile:
+      path: /etc/modprobe.d/uncommon_network_protocols.conf
+      create: yes
+      line: "install {{ item }} /bin/true"
+    loop: "{{ uncommon_protocols }}"
+  - name: Disable unused filesystems
+    community.general.modprobe:
+      name: "{{ item }}"
+      state: absent
+    loop: "{{ uncommon_protocols }}"
+

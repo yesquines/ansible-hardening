@@ -1,0 +1,11 @@
+---
+# handlers file for ansible-hardening
+- name: restart_sshd
+  ansible.builtin.systemd:
+    name: "{{ item.service }}"
+    state: restarted
+  when: ansible_distribution == item.distro
+  loop:
+  - {distro: Debian, service: ssh}
+  - {distro: CentOS, service: sshd}
+

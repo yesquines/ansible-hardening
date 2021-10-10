@@ -1,0 +1,9 @@
+---
+# defaults file for ansible-hardening
+
+hardening_ssh: true
+hardening_logindefs: true
+hardening_limits: true
+hardening_fs_net: true
+hardening_misc: true
+

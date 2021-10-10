@@ -1,0 +1,7 @@
+---
+- name: Basic Hardening Role
+  hosts: secmachines
+  remote_user: vagrant
+  become: yes
+  roles:
+    - ansible-hardening

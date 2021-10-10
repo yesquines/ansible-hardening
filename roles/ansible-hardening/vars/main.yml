@@ -1,0 +1,82 @@
+---
+# vars file for ansible-hardening
+
+#SSH VARS
+
+## Server
+ssh_permit_root_login: 'no'
+ssh_server_port: 22
+addressfamily: any
+ssh_listen_to: ['0.0.0.0']
+sshd_strict_modes: 'yes'
+sshd_syslog_facility: 'AUTH'
+sshd_log_level: 'VERBOSE'
+ssh_login_grace_time: 60s
+ssh_max_auth_retries: 3
+ssh_max_sessions: 3
+ssh_max_startups: '10:30:100'
+sshd_authenticationmethods: 'publickey'
+ssh_server_password_login: 'no'
+ssh_challengeresponseauthentication: 'no'
+ssh_client_alive_interval: 600
+ssh_client_alive_count: 5
+ssh_permit_tunnel: 'no'
+ssh_allow_tcp_forwarding: 'no'
+ssh_allow_agent_forwarding: 'no'
+ssh_gateway_ports: 'no'
+ssh_x11_forwarding: 'no'
+ssh_server_permit_environment_vars: 'no'
+ssh_server_accept_env_vars: 'LANG LC_*'
+ssh_compression: 'no'
+ssh_use_dns: 'no'
+ssh_print_motd: 'no'
+ssh_print_last_log: 'no'
+ssh_banner: 'yes'
+ssh_login_banner_text: | 
+  ------------------------------------------------------------------------------
+  * WARNING - HARDENED SERVER                                                  *
+  * You are accessing a secured system and your actions will be logged along   *
+  * with identifying information. Disconnect immediately if you are not an     *
+  * authorized user of this system.                                            *
+  * WARNING - HARDENED SERVER                                                *
+  ------------------------------------------------------------------------------
+
+## Client
+ssh_client_port: 22
+ssh_client_password_login: 'no'
+ssh_client_compression: 'no'
+ssh_client_roaming: 'no'
+ssh_client_hashknoenhosts: 'yes'
+ssh_client_sendenv: 'LANG LC_*'
+
+# OS Security
+logindefs_mail_dir: /var/mail
+logindefs_umask: '027'
+logindefs_max_age: '90'
+logindefs_min_age: '0'
+logindefs_retries: '5'
+logindefs_timeout: '60'
+logindefs_homeless: 'no'
+
+unused_filesystems:
+  - "cramfs"
+  - "freevxfs"
+  - "jffs2"
+  - "hfs"
+  - "hfsplus"
+  - "squashfs"
+  - "udf"
+  - "dccp"
+  - "rds"
+  - "sctp"
+  - "tipc"
+
+uncommon_protocols:
+  - "dccp"
+  - "sctp"
+  - "rds"
+  - "tipc"
+
+session_timeout: 600
+
+
