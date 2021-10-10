@@ -25,7 +25,7 @@ Vagrant.configure("2") do |config|
       end
 
       if "#{name}" == "centos"
-        server.vm.provision "shell", inline: "dnf install -q -y python3 > /dev/null"
+        server.vm.provision "shell", inline: "dnf install -q -y python3 &> /dev/null"
       else
         server.vm.provision "shell", inline: "DEBIAN_FRONTEND=noninteractive apt-get install -qq -y python3 > /dev/null"
       end
