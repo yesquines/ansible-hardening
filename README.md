@@ -50,7 +50,7 @@ Comandos                | Descrição
 
 ## Role Ansible Hardening 
 
-A role desse repositório foi criada com o intuito de apresentar um Hardening básico para ambientes Linux. Sua organização está dentro da pasta [roles][7] com a seguinte arquitetura:
+A `role` desse repositório foi criada com o intuito de apresentar um Hardening básico para ambientes Linux. Sua organização está dentro da pasta [roles][7] com a seguinte arquitetura:
 
 ```bash
 └── ansible-hardening
@@ -74,7 +74,7 @@ A role desse repositório foi criada com o intuito de apresentar um Hardening b�
         └── main.yml
 ```
 
-A role fará a configuração de boas práticas de segurança nos servidores provisionados pelo Vagrant, por isso sua execução pode ser realizada seguindo o comandos abaixo:
+A role fará a configuração de boas práticas de segurança nos servidores provisionados pelo Vagrant, por isso sua execução pode ser realizada seguindo os comandos abaixo:
 
 ```bash
 ansible-galaxy colletion install ansible.posix community.general
