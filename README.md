@@ -4,7 +4,7 @@ Palestra que visa mostrar como é possível automatizar as configurações e boa
 
 ## Slides da Palestra
 
-[Palestra-Ansible_Hardening.pdf][1]
+* [Palestra-Ansible_Hardening.pdf][1]
 
 ## Laboratório (DEMO)
 
@@ -50,7 +50,7 @@ Comandos                | Descrição
 
 ## Role Ansible Hardening 
 
-A `role` desse repositório foi criada com o intuito de apresentar um Hardening básico para ambientes Linux. Sua organização está dentro da pasta [roles][7] com a seguinte arquitetura:
+A `role` desse repositório foi criada com o intuito de apresentar um Hardening básico para ambientes Linux. Sua organização está dentro da pasta [roles/ansible-hardening][8] com a seguinte arquitetura:
 
 ```bash
 └── ansible-hardening
@@ -88,5 +88,5 @@ ansible-playbook hardening_role.yml
 [5]: https://www.vagrantup.com/
 [6]: ./Vagrantfile
 [7]: https://www.vagrantup.com/docs
-[8]: ./roles/
+[8]: ./roles/ansible-hardening/
 [9]: https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
