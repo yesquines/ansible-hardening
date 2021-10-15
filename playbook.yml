@@ -1,0 +1,57 @@
+- name: Playbook
+  hosts: secmachines
+  user: vagrant
+  become: yes
+  vars:  
+    remove_packages:
+    - telnet
+    - rsh 
+    - talk
+    - prelink
+    password_encrypt: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          66303662613430396134393466633032356631336436363239623565333935663566636463353032
+          6438386338626461346430656663393836633839383332310a353963326364643630613761343734
+          34356137636664313337303931376335373061393566633465373366323435643135373634346238
+          3631323335303134640a363763313837393964643135353431653464313930373235373537323937
+          65356362633232353037333563373237396262636465656636343666373934623536316338616435
+          6431646533363039363136613434323530646565326430313865
+  tasks:
+  - name: Removendo pacotes desnecessários
+    package:
+      name: "{{ remove_packages }}"
+      state: absent
+
+  - name: Configurando Parametros de Kernel
+    sysctl:
+      name: kernel.randomize_va_space
+      value: '2'
+      state: present
+      reload: yes
+
+  - name: Criando user
+    user:
+      name: security
+      create_home: yes
+      shell: /bin/bash
+      generate_ssh_key: yes
+      password: "{{ password_encrypt | string | password_hash('sha512') }}"
+      update_password: on_create
+
+  - name: Ativando SELinux
+    ansible.posix.selinux:
+      policy: targeted
+      state: enforcing
+    when: ansible_os_family == "RedHat"
+
+  - name: Configurando Firewall - Bloqueando Ping p/ Google e Cloudflare
+    ansible.builtin.iptables:
+      chain: OUTPUT
+      action: insert
+      protocol: icmp
+      destination: "{{ item }}"
+      jump: DROP
+    loop:
+    - 1.1.1.1
+    - 8.8.8.8
+
